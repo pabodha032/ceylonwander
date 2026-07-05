@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeylonWander - Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>CeylonWander</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="spots.html"><i class="fas fa-landmark"></i> Tourist Spots</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="admin.html" class="active"><i class="fas fa-user-shield"></i> Admin</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>Admin <span style="color: var(--primary-gold);">Panel</span></h1>
+                <p>Manage tourist spots, reviews, and content</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Admin Panel</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section class="admin-dashboard">
+        <div class="container">
+            <!-- Admin Stats -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalSpots">0</h3>
+                        <p>Total Spots</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalReviews">0</h3>
+                        <p>Total Reviews</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalImages">0</h3>
+                        <p>Total Images</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="manage-spots" onclick="switchTab('manage-spots')">
+                    <i class="fas fa-landmark"></i> Manage Spots
+                </button>
+                <button class="tab-btn" data-tab="add-spot" onclick="switchTab('add-spot')">
+                    <i class="fas fa-plus-circle"></i> Add Spot
+                </button>
+                <button class="tab-btn" data-tab="manage-reviews" onclick="switchTab('manage-reviews')">
+                    <i class="fas fa-star"></i> Manage Reviews
+                </button>
+                <button class="tab-btn" data-tab="settings" onclick="switchTab('settings')">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+
+            <!-- Tab Content: Manage Spots -->
+            <div class="tab-content active" id="manage-spots">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>Manage Tourist Spots</h3>
+                        <div class="admin-actions">
+                            <div class="search-box admin-search">
+                                <input type="text" id="adminSpotSearch" placeholder="Search spots..." onkeyup="filterAdminSpots()">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <button class="btn btn-primary" onclick="switchTab('add-spot')">
+                                <i class="fas fa-plus"></i> Add New
+                            </button>
+                        </div>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="spotsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Rating</th>
+                                    <th>Reviews</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="spotsTableBody">
+                                <!-- Dynamically loaded -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Add Spot -->
+            <div class="tab-content" id="add-spot">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>Add New Tourist Spot</h3>
+                        <p>Fill in the details to add a new tourist spot</p>
+                    </div>
+                    <form id="addSpotForm" class="admin-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="spotName">Spot Name *</label>
+                                <input type="text" id="spotName" placeholder="Enter spot name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="spotCategory">Category *</label>
+                                <select id="spotCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="historical">Historical</option>
+                                    <option value="nature">Nature</option>
+                                    <option value="beach">Beaches</option>
+                                    <option value="cultural">Cultural</option>
+                                    <option value="adventure">Adventure</option>
+                                    <option value="religious">Religious</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="spotLocation">Location *</label>
+                                <input type="text" id="spotLocation" placeholder="City, District" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="spotRating">Initial Rating</label>
+                                <input type="number" id="spotRating" placeholder="0.0" min="0" max="5" step="0.1" value="0.0">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="spotShortDesc">Short Description *</label>
+                                <input type="text" id="spotShortDesc" placeholder="Brief description (max 150 characters)" required maxlength="150">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="spotFullDesc">Full Description *</label>
+                                <textarea id="spotFullDesc" rows="5" placeholder="Detailed description of the tourist spot" required></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="spotFeatures">Features (comma separated)</label>
+                                <input type="text" id="spotFeatures" placeholder="e.g. Historical significance, Cultural heritage, Scenic views">
+                            </div>
+
+                            <!-- Image Upload Section -->
+                            <div class="form-group full-width">
+                                <label>Image Upload *</label>
+                                <div class="image-upload-section">
+                                    <div>
+                                        <label style="font-weight: 500; font-size: 0.9rem; color: var(--text-muted);">Option 1: Image URL</label>
+                                        <input type="text" id="spotImage" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 0.7rem 1rem; border: 2px solid #e8e8e8; border-radius: var(--border-radius); font-size: 0.95rem;">
+                                    </div>
+                                    <div class="divider">OR</div>
+                                    <div>
+                                        <label style="font-weight: 500; font-size: 0.9rem; color: var(--text-muted);">Option 2: Upload Local Image</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="spotImageFile" accept="image/*" class="file-input">
+                                            <label for="spotImageFile" class="file-label">
+                                                <i class="fas fa-cloud-upload-alt"></i> Choose Image File
+                                            </label>
+                                            <div id="filePreview" class="file-preview">
+                                                <span class="file-name"><i class="fas fa-file-image"></i> <span id="fileName"></span></span>
+                                                <span class="file-size" id="fileSize"></span>
+                                                <button type="button" class="btn-close-file" onclick="clearFileUpload()">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <small style="color: var(--text-muted); font-size: 0.8rem;">Supported formats: JPG, PNG, GIF, WebP (Max 5MB)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Image Preview -->
+                            <div class="form-group full-width">
+                                <label>Image Preview</label>
+                                <div class="image-preview" id="imagePreview">
+                                    <i class="fas fa-image"></i>
+                                    <span>No image selected</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-gold" id="submitSpotBtn">
+                                <i class="fas fa-save"></i> Add Spot
+                            </button>
+                            <button type="reset" class="btn btn-outline" onclick="resetAdminForm()">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tab Content: Manage Reviews -->
+            <div class="tab-content" id="manage-reviews">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>Manage Reviews</h3>
+                        <div class="admin-actions">
+                            <div class="search-box admin-search">
+                                <input type="text" id="adminReviewSearch" placeholder="Search reviews..." onkeyup="filterAdminReviews()">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <select id="reviewStatusFilter" onchange="filterAdminReviews()" class="admin-filter">
+                                <option value="all">All Reviews</option>
+                                <option value="published">Published</option>
+                                <option value="pending">Pending</option>
+                                <option value="reported">Reported</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="reviewsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Spot</th>
+                                    <th>Rating</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reviewsTableBody">
+                                <!-- Dynamically loaded -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Settings -->
+            <div class="tab-content" id="settings">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>Settings</h3>
+                        <p>Manage application settings and preferences</p>
+                    </div>
+
+                    <div class="settings-group">
+                        <h4>Site Settings</h4>
+                        <div class="settings-grid">
+                            <div class="setting-item">
+                                <label>Site Name</label>
+                                <input type="text" value="CeylonWander" class="setting-input">
+                            </div>
+                            <div class="setting-item">
+                                <label>Site Description</label>
+                                <input type="text" value="Discover the beauty of Sri Lanka" class="setting-input">
+                            </div>
+                            <div class="setting-item">
+                                <label>Contact Email</label>
+                                <input type="email" value="info@ceylonwander.com" class="setting-input">
+                            </div>
+                            <div class="setting-item">
+                                <label>Contact Phone</label>
+                                <input type="text" value="+94 11 234 5678" class="setting-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h4>Review Settings</h4>
+                        <div class="settings-grid">
+                            <div class="setting-item">
+                                <label>Auto-publish Reviews</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="autoPublish" checked>
+                                    <label for="autoPublish"></label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Require Email for Reviews</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="requireEmail" checked>
+                                    <label for="requireEmail"></label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Max Reviews per User</label>
+                                <input type="number" id="maxReviewsPerUser" value="10" min="1" max="50" class="setting-input" style="width: 100px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h4>Data Management</h4>
+                        <div class="settings-actions">
+                            <button class="btn btn-outline" onclick="exportData()">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            <button class="btn btn-outline" onclick="importData()">
+                                <i class="fas fa-upload"></i> Import Data
+                            </button>
+                            <button class="btn btn-outline" onclick="backupData()">
+                                <i class="fas fa-database"></i> Backup
+                            </button>
+                            <button class="btn btn-danger" onclick="resetData()">
+                                <i class="fas fa-trash"></i> Reset All Data
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-actions" style="margin-top: 2rem;">
+                        <button class="btn btn-gold" onclick="saveSettings()">
+                            <i class="fas fa-save"></i> Save Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>CeylonWander</span>
+                    </div>
+                    <p>Discover the beauty of Sri Lanka with authentic reviews and comprehensive guides to the island's most spectacular destinations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="spots.html">Tourist Spots</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="admin.html">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="spots.html?category=historical">Historical Sites</a></li>
+                        <li><a href="spots.html?category=nature">Nature &amp; Parks</a></li>
+                        <li><a href="spots.html?category=beach">Beaches</a></li>
+                        <li><a href="spots.html?category=cultural">Cultural Sites</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Colombo, Sri Lanka</li>
+                        <li><i class="fas fa-envelope"></i> info@ceylonwander.com</li>
+                        <li><i class="fas fa-phone"></i> +94 11 234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CeylonWander. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================== -->
+    <!-- SCRIPTS - Load in CORRECT ORDER          -->
+    <!-- ======================================== -->
+    <!-- 1. API Configuration FIRST -->
+    <script src="js/api-config.js"></script>
+    <!-- 2. Core Utilities -->
+    <script src="js/app.js"></script>
+    <!-- 3. Data Handling -->
+    <script src="js/spots.js"></script>
+    <script src="js/reviews.js"></script>
+    <!-- 4. Admin Panel -->
+    <script src="js/admin.js"></script>
+
+    <!-- ======================================== -->
+    <!-- ADMIN PAGE INITIALIZATION                -->
+    <!-- ======================================== -->
+    <script>
+        // Initialize admin dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.querySelector('.admin-dashboard')) {
+                initAdminDashboard();
+            }
+        });
+
+        // Clear file upload function (used in HTML)
+        function clearFileUpload() {
+            const fileInput = document.getElementById('spotImageFile');
+            if (fileInput) fileInput.value = '';
+
+            const filePreview = document.getElementById('filePreview');
+            if (filePreview) {
+                filePreview.classList.remove('show');
+                filePreview.querySelector('#fileName').textContent = '';
+                filePreview.querySelector('#fileSize').textContent = '';
+            }
+
+            document.getElementById('spotImage').value = '';
+
+            const preview = document.getElementById('imagePreview');
+            if (preview) {
+                preview.innerHTML = `
+                    <i class="fas fa-image"></i>
+                    <span>No image selected</span>
+                `;
+            }
+        }
+
+        // Export functions needed by HTML
+        window.clearFileUpload = clearFileUpload;
+    </script>
+</body>
+</html>

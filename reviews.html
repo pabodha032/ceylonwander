@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeylonWander - Reviews</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>CeylonWander</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="spots.html"><i class="fas fa-landmark"></i> Tourist Spots</a></li>
+                <li><a href="reviews.html" class="active"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="admin.html"><i class="fas fa-user-shield"></i> Admin</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>Traveler <span style="color: var(--primary-gold);">Reviews</span></h1>
+                <p>Read authentic reviews from travelers who've explored Sri Lanka</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Reviews</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Overview -->
+    <section class="reviews-overview">
+        <div class="container">
+            <div class="overview-grid">
+                <div class="overview-card total-reviews">
+                    <div class="overview-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="overview-number" id="totalReviewsCount">0</div>
+                    <div class="overview-label">Total Reviews</div>
+                </div>
+                <div class="overview-card avg-rating">
+                    <div class="overview-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="overview-number" id="avgRatingOverall">0.0</div>
+                    <div class="overview-label">Average Rating</div>
+                </div>
+                <div class="overview-card top-spot">
+                    <div class="overview-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="overview-number" id="topRatedSpot">-</div>
+                    <div class="overview-label">Top Rated Spot</div>
+                </div>
+                <div class="overview-card total-spots">
+                    <div class="overview-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="overview-number" id="spotsWithReviews">0</div>
+                    <div class="overview-label">Spots with Reviews</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Filter Section -->
+    <section class="reviews-filter-section">
+        <div class="container">
+            <div class="reviews-toolbar">
+                <div class="reviews-search">
+                    <div class="search-box">
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <input type="text" id="reviewSearchInput" placeholder="Search reviews by spot name or reviewer..." />
+                        <button class="btn btn-primary" onclick="filterReviews()">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="reviews-filters">
+                    <select id="ratingFilter" onchange="filterReviews()">
+                        <option value="all">All Ratings</option>
+                        <option value="5">5 Stars ★★★★★</option>
+                        <option value="4">4 Stars ★★★★</option>
+                        <option value="3">3 Stars ★★★</option>
+                        <option value="2">2 Stars ★★</option>
+                        <option value="1">1 Star ★</option>
+                    </select>
+                    <select id="sortFilter" onchange="filterReviews()">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="highest">Highest Rating</option>
+                        <option value="lowest">Lowest Rating</option>
+                        <option value="helpful">Most Helpful</option>
+                    </select>
+                </div>
+            </div>
+            <div class="reviews-count" id="reviewsCount">
+                Showing <span id="countNumber">0</span> reviews
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews List -->
+    <section class="reviews-list-section">
+        <div class="container">
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Reviews will be loaded dynamically -->
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search-location"></i>
+                <h3>No Reviews Found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+                <button class="btn btn-primary" onclick="resetFilters()">
+                    <i class="fas fa-undo"></i> Reset Filters
+                </button>
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more-container" id="loadMoreContainer">
+                <button class="btn btn-gold" onclick="loadMoreReviews()">
+                    <i class="fas fa-spinner"></i> Load More Reviews
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Rated Spots -->
+    <section class="top-rated-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Top Rated</span>
+                <h2>Highest Rated <span style="color: var(--primary-gold);">Destinations</span></h2>
+                <p>Discover the most loved tourist spots in Sri Lanka</p>
+            </div>
+            <div class="top-rated-grid" id="topRatedGrid">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Write Review CTA -->
+    <section class="write-review-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Share Your <span style="color: var(--primary-gold);">Experience</span></h2>
+                    <p>Have you visited a tourist spot in Sri Lanka? Share your experience and help other travelers make informed decisions.</p>
+                </div>
+                <a href="spots.html" class="btn btn-gold">
+                    <i class="fas fa-pen"></i> Write a Review
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>CeylonWander</span>
+                    </div>
+                    <p>
+                        Discover the beauty of Sri Lanka with authentic reviews
+                        and comprehensive guides to the island's most spectacular
+                        destinations.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="spots.html">Tourist Spots</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="admin.html">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="spots.html?category=historical">Historical Sites</a></li>
+                        <li><a href="spots.html?category=nature">Nature &amp; Parks</a></li>
+                        <li><a href="spots.html?category=beach">Beaches</a></li>
+                        <li><a href="spots.html?category=cultural">Cultural Sites</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Colombo, Sri Lanka</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@ceylonwander.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+94 11 234 5678</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CeylonWander. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================== -->
+    <!-- SCRIPTS - Load in CORRECT ORDER          -->
+    <!-- ======================================== -->
+    <!-- 1. API Configuration FIRST -->
+    <script src="js/api-config.js"></script>
+    <!-- 2. Core Utilities -->
+    <script src="js/app.js"></script>
+    <!-- 3. Data Handling -->
+    <script src="js/spots.js"></script>
+    <script src="js/reviews.js"></script>
+
+    <!-- ======================================== -->
+    <!-- REVIEWS PAGE INITIALIZATION              -->
+    <!-- ======================================== -->
+    <script>
+        let allReviews = [];
+        let currentPage = 0;
+        const reviewsPerPage = 10;
+
+        /**
+         * Load all reviews from Azure API
+         */
+        async function loadAllReviews() {
+            try {
+                // Try to get reviews from Azure API
+                const reviews = await getAllReviews();
+                if (reviews && reviews.length > 0) {
+                    allReviews = reviews;
+                } else {
+                    // If no reviews in Azure, check localStorage
+                    let storedReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+                    if (storedReviews.length === 0) {
+                        // Generate sample reviews
+                        storedReviews = await generateSampleReviews();
+                        localStorage.setItem('reviews', JSON.stringify(storedReviews));
+                    }
+                    allReviews = storedReviews;
+                }
+                displayReviews(allReviews);
+                updateCount(allReviews.length);
+                updateOverviewStats();
+                loadTopRatedSpots();
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                // Fallback to localStorage
+                let storedReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+                if (storedReviews.length === 0) {
+                    storedReviews = await generateSampleReviews();
+                    localStorage.setItem('reviews', JSON.stringify(storedReviews));
+                }
+                allReviews = storedReviews;
+                displayReviews(allReviews);
+                updateCount(allReviews.length);
+                updateOverviewStats();
+                loadTopRatedSpots();
+            }
+        }
+
+        /**
+         * Generate sample reviews
+         */
+        async function generateSampleReviews() {
+            const spots = await getSpots();
+            const sampleReviews = [];
+            const names = ['John Smith', 'Sarah Johnson', 'Michael Lee', 'Emily Brown', 'David Wilson',
+                'Lisa Anderson', 'Robert Taylor', 'Maria Garcia', 'James Martinez', 'Patricia Davis',
+                'Tharindu Perera', 'Kumari Silva', 'Anura Bandara', 'Nimali Fernando', 'Kasun Jayawardena'];
+            const comments = [
+                'Amazing place! The views were absolutely breathtaking. Highly recommend visiting at sunrise.',
+                'A must-visit destination in Sri Lanka. Rich in history and culture. The architecture is stunning.',
+                'Beautiful spot but very crowded during peak season. Try to visit early morning.',
+                'Loved every moment here. The locals were friendly and the food was delicious.',
+                'Incredible experience! The wildlife and nature are spectacular.',
+                'Good place but needs better maintenance. Still worth a visit.',
+                'Wonderful cultural experience. Learned so much about Sri Lankan history.',
+                'The views from the top are unforgettable. The hike was challenging but rewarding.',
+                'A peaceful and serene location. Perfect for meditation and relaxation.',
+                'Great spot for photography. Every angle offers a picture-perfect moment.',
+                'The best place I visited in Sri Lanka! The sunset views are magical.',
+                'Interesting historical site. The guide was very knowledgeable.',
+                'Beautiful beach with crystal clear water. Perfect for swimming.',
+                'A hidden gem! Not many tourists know about this place.',
+                'Spectacular architecture and rich history. A must-see in Sri Lanka.'
+            ];
+
+            spots.forEach((spot, spotIndex) => {
+                const numReviews = Math.floor(Math.random() * 5) + 2;
+                for (let i = 0; i < numReviews; i++) {
+                    const rating = Math.floor(Math.random() * 4) + 2;
+                    const nameIndex = Math.floor(Math.random() * names.length);
+                    const commentIndex = Math.floor(Math.random() * comments.length);
+                    const daysAgo = Math.floor(Math.random() * 180);
+                    const date = new Date();
+                    date.setDate(date.getDate() - daysAgo);
+
+                    sampleReviews.push({
+                        id: sampleReviews.length + 1,
+                        spotId: spot.id,
+                        spotName: spot.name,
+                        name: names[nameIndex],
+                        rating: rating,
+                        comment: comments[commentIndex],
+                        date: date.toISOString(),
+                        likes: Math.floor(Math.random() * 50),
+                        helpful: Math.floor(Math.random() * 30)
+                    });
+                }
+            });
+
+            return sampleReviews;
+        }
+
+        /**
+         * Display reviews
+         */
+        function displayReviews(reviews) {
+            const grid = document.getElementById('reviewsGrid');
+            const start = currentPage * reviewsPerPage;
+            const end = start + reviewsPerPage;
+            const pageReviews = reviews.slice(start, end);
+
+            if (pageReviews.length === 0 && currentPage === 0) {
+                document.getElementById('noResults').style.display = 'block';
+                grid.innerHTML = '';
+                document.getElementById('loadMoreContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('noResults').style.display = 'none';
+
+            const reviewsHTML = pageReviews.map(review => `
+                <div class="review-item">
+                    <div class="review-item-header">
+                        <div class="reviewer-avatar">
+                            ${review.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>${review.name}</h4>
+                            <span class="review-spot">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <a href="spot-details.html?id=${review.spotId}">${review.spotName || 'Tourist Spot'}</a>
+                            </span>
+                            <span class="review-date">${formatDate(review.date)}</span>
+                        </div>
+                        <div class="review-rating-badge">
+                            ${generateStarRating(review.rating)}
+                            <span class="rating-number">${review.rating}.0</span>
+                        </div>
+                    </div>
+                    <div class="review-item-content">
+                        <p>${review.comment}</p>
+                    </div>
+                    <div class="review-item-footer">
+                        <button class="btn-helpful" onclick="markHelpful(${review.id})">
+                            <i class="fas fa-thumbs-up"></i>
+                            <span>Helpful (${review.helpful || 0})</span>
+                        </button>
+                        <button class="btn-share" onclick="shareReview(${review.id})">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                        <button class="btn-report" onclick="reportReview(${review.id})">
+                            <i class="fas fa-flag"></i> Report
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            if (currentPage === 0) {
+                grid.innerHTML = reviewsHTML;
+            } else {
+                grid.innerHTML += reviewsHTML;
+            }
+
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            if (reviews.length > (currentPage + 1) * reviewsPerPage) {
+                loadMoreContainer.style.display = 'block';
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        /**
+         * Filter reviews
+         */
+        function filterReviews() {
+            const search = document.getElementById('reviewSearchInput').value.toLowerCase();
+            const ratingFilter = document.getElementById('ratingFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            let filtered = allReviews;
+
+            if (search) {
+                filtered = filtered.filter(review =>
+                    review.name.toLowerCase().includes(search) ||
+                    (review.spotName && review.spotName.toLowerCase().includes(search)) ||
+                    review.comment.toLowerCase().includes(search)
+                );
+            }
+
+            if (ratingFilter !== 'all') {
+                const rating = parseInt(ratingFilter);
+                filtered = filtered.filter(review => Math.floor(review.rating) === rating);
+            }
+
+            filtered.sort((a, b) => {
+                switch(sortFilter) {
+                    case 'newest':
+                        return new Date(b.date) - new Date(a.date);
+                    case 'oldest':
+                        return new Date(a.date) - new Date(b.date);
+                    case 'highest':
+                        return b.rating - a.rating;
+                    case 'lowest':
+                        return a.rating - b.rating;
+                    case 'helpful':
+                        return (b.helpful || 0) - (a.helpful || 0);
+                    default:
+                        return 0;
+                }
+            });
+
+            currentPage = 0;
+            displayReviews(filtered);
+            updateCount(filtered.length);
+        }
+
+        function updateCount(count) {
+            document.getElementById('countNumber').textContent = count;
+        }
+
+        function resetFilters() {
+            document.getElementById('reviewSearchInput').value = '';
+            document.getElementById('ratingFilter').value = 'all';
+            document.getElementById('sortFilter').value = 'newest';
+            currentPage = 0;
+            filterReviews();
+        }
+
+        function loadMoreReviews() {
+            currentPage++;
+            filterReviews();
+        }
+
+        /**
+         * Update overview stats
+         */
+        function updateOverviewStats() {
+            const reviews = allReviews;
+            document.getElementById('totalReviewsCount').textContent = reviews.length;
+
+            if (reviews.length > 0) {
+                const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+                document.getElementById('avgRatingOverall').textContent = avgRating.toFixed(1);
+            }
+
+            // Find top rated spot
+            getSpots().then(spots => {
+                let topSpot = null;
+                let topRating = 0;
+
+                spots.forEach(spot => {
+                    const spotReviews = reviews.filter(r => r.spotId === spot.id);
+                    if (spotReviews.length > 0) {
+                        const avg = spotReviews.reduce((sum, r) => sum + r.rating, 0) / spotReviews.length;
+                        if (avg > topRating) {
+                            topRating = avg;
+                            topSpot = spot;
+                        }
+                    }
+                });
+
+                if (topSpot) {
+                    document.getElementById('topRatedSpot').textContent = topSpot.name;
+                }
+            }).catch(error => {
+                console.error('Error getting spots for overview:', error);
+            });
+
+            const spotsWithReviews = new Set(reviews.map(r => r.spotId));
+            document.getElementById('spotsWithReviews').textContent = spotsWithReviews.size;
+        }
+
+        /**
+         * Load top rated spots
+         */
+        async function loadTopRatedSpots() {
+            try {
+                const spots = await getSpots();
+                const reviews = allReviews;
+
+                const spotRatings = spots.map(spot => {
+                    const spotReviews = reviews.filter(r => r.spotId === spot.id);
+                    const avgRating = spotReviews.length > 0 ?
+                        spotReviews.reduce((sum, r) => sum + r.rating, 0) / spotReviews.length : 0;
+                    return {
+                        ...spot,
+                        avgRating: avgRating,
+                        reviewCount: spotReviews.length
+                    };
+                });
+
+                const topSpots = spotRatings
+                    .filter(s => s.reviewCount > 0)
+                    .sort((a, b) => b.avgRating - a.avgRating)
+                    .slice(0, 6);
+
+                const grid = document.getElementById('topRatedGrid');
+
+                if (topSpots.length === 0) {
+                    grid.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; grid-column: 1 / -1;">
+                            <p style="color: var(--text-muted);">No reviews yet. Be the first to rate a spot!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = topSpots.map(spot => `
+                    <div class="top-rated-card">
+                        <div class="top-rated-image">
+                            <img src="${spot.imageUrl || spot.image || 'images/placeholder.jpg'}" alt="${spot.name}">
+                            <div class="top-rated-badge">
+                                <i class="fas fa-star"></i> ${spot.avgRating.toFixed(1)}
+                            </div>
+                        </div>
+                        <div class="top-rated-info">
+                            <h4>${spot.name}</h4>
+                            <p>${spot.location}</p>
+                            <div class="top-rated-meta">
+                                <span><i class="fas fa-comment"></i> ${spot.reviewCount} reviews</span>
+                            </div>
+                            <a href="spot-details.html?id=${spot.id}" class="btn btn-outline btn-sm">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading top rated spots:', error);
+            }
+        }
+
+        /**
+         * Generate star rating HTML
+         */
+        function generateStarRating(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star" style="color: var(--primary-gold);"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt" style="color: var(--primary-gold);"></i>';
+                } else {
+                    stars += '<i class="far fa-star" style="color: #ddd;"></i>';
+                }
+            }
+            return stars;
+        }
+
+        /**
+         * Format date
+         */
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        /**
+         * Mark review as helpful
+         */
+        function markHelpful(reviewId) {
+            const review = allReviews.find(r => r.id === reviewId);
+            if (review) {
+                review.helpful = (review.helpful || 0) + 1;
+                localStorage.setItem('reviews', JSON.stringify(allReviews));
+                filterReviews();
+            }
+        }
+
+        function shareReview(reviewId) {
+            alert('Share this review (Feature coming soon!)');
+        }
+
+        function reportReview(reviewId) {
+            if (confirm('Report this review as inappropriate?')) {
+                alert('Review reported. Thank you for helping keep our community safe!');
+            }
+        }
+
+        // ========================================
+        // INITIALIZE ON PAGE LOAD
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllReviews();
+        });
+
+        // Make functions globally available
+        window.loadAllReviews = loadAllReviews;
+        window.filterReviews = filterReviews;
+        window.resetFilters = resetFilters;
+        window.loadMoreReviews = loadMoreReviews;
+        window.markHelpful = markHelpful;
+        window.shareReview = shareReview;
+        window.reportReview = reportReview;
+        window.formatDate = formatDate;
+        window.generateStarRating = generateStarRating;
+    </script>
+</body>
+</html>

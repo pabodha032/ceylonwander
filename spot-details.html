@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeylonWander - Spot Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/spot-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>CeylonWander</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="spots.html"><i class="fas fa-landmark"></i> Tourist Spots</a></li>
+                <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                <li><a href="admin.html"><i class="fas fa-user-shield"></i> Admin</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spot Details Section -->
+    <section class="spot-details-section">
+        <div class="container">
+            <!-- Back Button -->
+            <div class="back-button">
+                <a href="spots.html" class="btn btn-outline btn-sm">
+                    <i class="fas fa-arrow-left"></i> Back to Spots
+                </a>
+            </div>
+
+            <!-- Spot Details Content -->
+            <div class="spot-details-content" id="spotDetails">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviewsSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Reviews</span>
+                <h2>Visitor <span style="color: var(--primary-gold);">Reviews</span></h2>
+                <p>What travelers are saying about this destination</p>
+            </div>
+
+            <!-- Reviews Summary -->
+            <div class="reviews-summary" id="reviewsSummary">
+                <!-- Dynamically loaded -->
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list" id="reviewsList">
+                <!-- Dynamically loaded -->
+            </div>
+
+            <!-- Add Review Form -->
+            <div class="add-review-section">
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <span class="section-tag">Share Your Experience</span>
+                    <h3>Write a <span style="color: var(--primary-gold);">Review</span></h3>
+                </div>
+
+                <div class="review-form-container">
+                    <form id="reviewForm" onsubmit="handleReviewFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="reviewerName">Your Name</label>
+                            <input type="text" id="reviewerName" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewerEmail">Your Email</label>
+                            <input type="email" id="reviewerEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Rating</label>
+                            <div class="star-rating-input">
+                                <i class="fas fa-star" data-rating="1" onclick="setRating(1)"></i>
+                                <i class="fas fa-star" data-rating="2" onclick="setRating(2)"></i>
+                                <i class="fas fa-star" data-rating="3" onclick="setRating(3)"></i>
+                                <i class="fas fa-star" data-rating="4" onclick="setRating(4)"></i>
+                                <i class="fas fa-star" data-rating="5" onclick="setRating(5)"></i>
+                                <span id="ratingDisplay" style="margin-left: 1rem; color: var(--text-muted);">Select rating</span>
+                            </div>
+                            <input type="hidden" id="reviewRating" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewComment">Your Review</label>
+                            <textarea id="reviewComment" rows="5" placeholder="Share your experience at this tourist spot..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold">
+                            <i class="fas fa-paper-plane"></i> Submit Review
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nearby Spots Section -->
+    <section class="nearby-spots-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">You May Also Like</span>
+                <h2>Nearby <span style="color: var(--primary-gold);">Attractions</span></h2>
+            </div>
+            <div class="nearby-spots-grid" id="nearbySpots">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>CeylonWander</span>
+                    </div>
+                    <p>
+                        Discover the beauty of Sri Lanka with authentic reviews
+                        and comprehensive guides to the island's most spectacular
+                        destinations.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="spots.html">Tourist Spots</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="admin.html">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="spots.html?category=historical">Historical Sites</a></li>
+                        <li><a href="spots.html?category=nature">Nature &amp; Parks</a></li>
+                        <li><a href="spots.html?category=beach">Beaches</a></li>
+                        <li><a href="spots.html?category=cultural">Cultural Sites</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Colombo, Sri Lanka</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@ceylonwander.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+94 11 234 5678</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CeylonWander. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================== -->
+    <!-- SCRIPTS - Load in CORRECT ORDER          -->
+    <!-- ======================================== -->
+    <!-- 1. API Configuration FIRST -->
+    <script src="js/api-config.js"></script>
+    <!-- 2. Core Utilities -->
+    <script src="js/app.js"></script>
+    <!-- 3. Data Handling -->
+    <script src="js/spots.js"></script>
+    <script src="js/reviews.js"></script>
+
+    <!-- ======================================== -->
+    <!-- SPOT DETAILS PAGE INITIALIZATION         -->
+    <!-- ======================================== -->
+    <script>
+        let currentSpotId = null;
+        let selectedRating = 0;
+
+        /**
+         * Initialize page on load
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const spotId = urlParams.get('id');
+
+            if (spotId) {
+                currentSpotId = parseInt(spotId);
+                loadSpotDetails(currentSpotId);
+                loadReviews(currentSpotId);
+                loadNearbySpots(currentSpotId);
+            } else {
+                window.location.href = 'spots.html';
+            }
+        });
+
+        /**
+         * Load spot details from Azure API
+         */
+        async function loadSpotDetails(spotId) {
+            try {
+                const spot = await getSpotById(spotId);
+                if (!spot) {
+                    document.getElementById('spotDetails').innerHTML = `
+                        <div class="not-found">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h2>Tourist Spot Not Found</h2>
+                            <p>The spot you're looking for doesn't exist.</p>
+                            <a href="spots.html" class="btn btn-primary">View All Spots</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Update page title
+                document.title = `${spot.name} - CeylonWander`;
+
+                const detailsHTML = `
+                    <div class="spot-details-header">
+                        <div class="spot-details-image">
+                            <img src="${spot.imageUrl || spot.image || 'images/placeholder.jpg'}" alt="${spot.name}">
+                            <div class="spot-details-badges">
+                                <span class="badge category-badge">${spot.category}</span>
+                                <span class="badge rating-badge">
+                                    <i class="fas fa-star"></i> ${spot.rating}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="spot-details-info">
+                            <h1>${spot.name}</h1>
+                            <div class="spot-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${spot.location}</span>
+                            </div>
+                            <div class="spot-quick-stats">
+                                <div class="quick-stat">
+                                    <i class="fas fa-star"></i>
+                                    <span>${spot.rating} / 5.0</span>
+                                </div>
+                                <div class="quick-stat">
+                                    <i class="fas fa-comment"></i>
+                                    <span>${spot.reviewsCount || 0} Reviews</span>
+                                </div>
+                                <div class="quick-stat">
+                                    <i class="fas fa-tag"></i>
+                                    <span>${spot.category}</span>
+                                </div>
+                            </div>
+                            <div class="spot-full-description">
+                                <h3>About This Place</h3>
+                                <p>${spot.fullDescription || spot.shortDescription}</p>
+                            </div>
+                            <div class="spot-features">
+                                <h4>Key Features</h4>
+                                <ul>
+                                    ${spot.features ? spot.features.map(feature =>
+                                        `<li><i class="fas fa-check-circle"></i> ${feature}</li>`
+                                    ).join('') : `
+                                        <li><i class="fas fa-check-circle"></i> Historical significance</li>
+                                        <li><i class="fas fa-check-circle"></i> Cultural heritage</li>
+                                        <li><i class="fas fa-check-circle"></i> Scenic views</li>
+                                        <li><i class="fas fa-check-circle"></i> Family-friendly</li>
+                                    `}
+                                </ul>
+                            </div>
+                            <div class="spot-actions">
+                                <button class="btn btn-gold" onclick="scrollToReviews()">
+                                    <i class="fas fa-star"></i> Read Reviews
+                                </button>
+                                <button class="btn btn-outline" onclick="openMap('${spot.location}')">
+                                    <i class="fas fa-map"></i> View on Map
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('spotDetails').innerHTML = detailsHTML;
+            } catch (error) {
+                console.error('Error loading spot details:', error);
+                document.getElementById('spotDetails').innerHTML = `
+                    <div class="not-found">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h2>Error Loading Spot</h2>
+                        <p>There was an error loading this spot. Please try again.</p>
+                        <a href="spots.html" class="btn btn-primary">View All Spots</a>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Load reviews for a spot from Azure API
+         */
+        async function loadReviews(spotId) {
+            try {
+                const reviews = await getReviewsBySpotId(spotId);
+                const spot = await getSpotById(spotId);
+                if (!spot) return;
+
+                // Reviews Summary
+                const summaryHTML = `
+                    <div class="summary-card">
+                        <div class="summary-rating">
+                            <div class="big-rating">${spot.rating}</div>
+                            <div class="rating-stars">
+                                ${generateStarRating(spot.rating)}
+                            </div>
+                            <div class="rating-count">${reviews.length} reviews</div>
+                        </div>
+                        <div class="rating-distribution">
+                            ${generateRatingDistribution(reviews)}
+                        </div>
+                    </div>
+                `;
+                document.getElementById('reviewsSummary').innerHTML = summaryHTML;
+
+                // Reviews List
+                if (reviews.length === 0) {
+                    document.getElementById('reviewsList').innerHTML = `
+                        <div class="no-reviews">
+                            <i class="fas fa-comment-slash"></i>
+                            <h4>No Reviews Yet</h4>
+                            <p>Be the first to share your experience at ${spot.name}!</p>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('reviewsList').innerHTML = reviews.map(review => `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <div class="reviewer-avatar">
+                                        ${(review.reviewerName || review.name || 'U').charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <h4>${review.reviewerName || review.name}</h4>
+                                        <span class="review-date">${formatDate(review.date)}</span>
+                                    </div>
+                                </div>
+                                <div class="review-rating">
+                                    ${generateStarRating(review.rating)}
+                                </div>
+                            </div>
+                            <div class="review-content">
+                                <p>${review.comment}</p>
+                            </div>
+                            <div class="review-footer">
+                                <button class="btn-like" onclick="likeReview(${review.id})">
+                                    <i class="fas fa-thumbs-up"></i> <span>${review.likes || 0}</span>
+                                </button>
+                                <button class="btn-report" onclick="reportReview(${review.id})">
+                                    <i class="fas fa-flag"></i> Report
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                document.getElementById('reviewsSummary').innerHTML = `
+                    <div class="summary-card">
+                        <p style="color: var(--text-muted);">Error loading reviews. Please try again.</p>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Load nearby spots
+         */
+        async function loadNearbySpots(spotId) {
+            try {
+                const currentSpot = await getSpotById(spotId);
+                const allSpots = await getSpots();
+                if (!currentSpot) return;
+
+                // Get nearby spots (excluding current)
+                const nearbySpots = allSpots
+                    .filter(s => s.id !== spotId)
+                    .slice(0, 3);
+
+                if (nearbySpots.length === 0) {
+                    document.getElementById('nearbySpots').innerHTML = `
+                        <div style="text-align: center; padding: 2rem; grid-column: 1 / -1;">
+                            <p style="color: var(--text-muted);">No nearby spots found.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const nearbyHTML = nearbySpots.map(spot => `
+                    <div class="nearby-card">
+                        <div class="nearby-image">
+                            <img src="${spot.imageUrl || spot.image || 'images/placeholder.jpg'}" alt="${spot.name}">
+                            <span class="nearby-rating">
+                                <i class="fas fa-star"></i> ${spot.rating}
+                            </span>
+                        </div>
+                        <div class="nearby-info">
+                            <h4>${spot.name}</h4>
+                            <p>${spot.location}</p>
+                            <a href="spot-details.html?id=${spot.id}" class="btn btn-outline btn-sm">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('nearbySpots').innerHTML = nearbyHTML;
+            } catch (error) {
+                console.error('Error loading nearby spots:', error);
+            }
+        }
+
+        /**
+         * Generate star rating HTML
+         */
+        function generateStarRating(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star" style="color: var(--primary-gold);"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt" style="color: var(--primary-gold);"></i>';
+                } else {
+                    stars += '<i class="far fa-star" style="color: #ddd;"></i>';
+                }
+            }
+            return stars;
+        }
+
+        /**
+         * Generate rating distribution
+         */
+        function generateRatingDistribution(reviews) {
+            const distribution = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
+            reviews.forEach(review => {
+                if (review.rating >= 1 && review.rating <= 5) {
+                    distribution[review.rating]++;
+                }
+            });
+
+            const total = reviews.length;
+            return Object.entries(distribution).reverse().map(([rating, count]) => `
+                <div class="distribution-row">
+                    <span class="distribution-label">${rating} <i class="fas fa-star" style="color: var(--primary-gold); font-size: 0.8rem;"></i></span>
+                    <div class="distribution-bar">
+                        <div class="distribution-fill" style="width: ${total > 0 ? (count / total * 100) : 0}%;"></div>
+                    </div>
+                    <span class="distribution-count">${count}</span>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Set rating for review form
+         */
+        function setRating(rating) {
+            selectedRating = rating;
+            document.getElementById('reviewRating').value = rating;
+            const stars = document.querySelectorAll('.star-rating-input i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.style.color = 'var(--primary-gold)';
+                    star.className = 'fas fa-star';
+                } else {
+                    star.style.color = '#ddd';
+                    star.className = 'far fa-star';
+                }
+            });
+            document.getElementById('ratingDisplay').textContent = `${rating} / 5`;
+        }
+
+        /**
+         * Handle the review form submission.
+         *
+         * FIX: this used to be a second, local `submitReview(event)` function that
+         * silently overrode the correct `submitReview()` from reviews.js (via
+         * `window.submitReview = submitReview` at the bottom of this file). That
+         * local version called a different, incompatible API path
+         * (`${apiUrl}/reviews` instead of `?endpoint=reviews`), and skipped the
+         * rating-recalculation and offline-fallback logic reviews.js already
+         * handles.
+         *
+         * Now this function only gathers the form data and hands it to the
+         * shared `submitReview(reviewData)` from reviews.js — it no longer
+         * defines its own competing version, and nothing overwrites
+         * `window.submitReview` anymore.
+         */
+        async function handleReviewFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('reviewerName').value;
+            const email = document.getElementById('reviewerEmail').value;
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            const comment = document.getElementById('reviewComment').value;
+
+            if (rating === 0) {
+                alert('Please select a rating');
+                return;
+            }
+
+            try {
+                const spot = await getSpotById(currentSpotId);
+                const reviewData = {
+                    spotId: currentSpotId,
+                    spotName: spot.name,
+                    name: name,
+                    email: email,
+                    rating: rating,
+                    comment: comment
+                };
+
+                // Delegate to the shared submitReview() in reviews.js
+                await submitReview(reviewData);
+
+                alert('Thank you for your review!');
+
+                // Reset form
+                document.getElementById('reviewForm').reset();
+                setRating(0);
+                document.querySelectorAll('.star-rating-input i').forEach(star => {
+                    star.style.color = '#ddd';
+                    star.className = 'far fa-star';
+                });
+                document.getElementById('ratingDisplay').textContent = 'Select rating';
+
+                // Reload reviews
+                await loadReviews(currentSpotId);
+                await loadSpotDetails(currentSpotId);
+            } catch (error) {
+                console.error('Error submitting review:', error);
+                alert('Error submitting review. Please try again.\n\n' + error.message);
+            }
+        }
+
+        function likeReview(reviewId) {
+            alert('Liked review! (Feature coming soon)');
+        }
+
+        function reportReview(reviewId) {
+            if (confirm('Report this review as inappropriate?')) {
+                alert('Review reported. Thank you for helping keep our community safe!');
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        function openMap(location) {
+            window.open(`https://www.google.com/maps/search/${encodeURIComponent(location)}`, '_blank');
+        }
+
+        function scrollToReviews() {
+            document.getElementById('reviewsSection').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Make functions globally available
+        window.setRating = setRating;
+        window.handleReviewFormSubmit = handleReviewFormSubmit;
+        window.likeReview = likeReview;
+        window.reportReview = reportReview;
+        window.openMap = openMap;
+        window.scrollToReviews = scrollToReviews;
+        window.formatDate = formatDate;
+        window.generateStarRating = generateStarRating;
+    </script>
+</body>
+</html>

@@ -1,0 +1,698 @@
+/* ========================================
+   SPOT DETAILS PAGE SPECIFIC STYLES
+   ======================================== */
+
+/* Back Button */
+.back-button {
+    padding-top: 100px;
+    margin-bottom: 2rem;
+}
+
+.back-button .btn {
+    padding: 0.6rem 1.5rem;
+}
+
+/* Spot Details Section */
+.spot-details-section {
+    padding: 0 0 4rem;
+    background: var(--bg-light);
+}
+
+.spot-details-content {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+/* Not Found */
+.not-found {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.not-found i {
+    font-size: 4rem;
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+}
+
+.not-found h2 {
+    margin-bottom: 0.5rem;
+}
+
+.not-found p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* Spot Details Header */
+.spot-details-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.spot-details-image {
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.spot-details-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.spot-details-badges {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    backdrop-filter: blur(10px);
+}
+
+.category-badge {
+    background: rgba(0,0,0,0.7);
+    color: white;
+}
+
+.rating-badge {
+    background: rgba(199, 162, 59, 0.95);
+    color: #1A2C1E;
+}
+
+.rating-badge i {
+    margin-right: 0.3rem;
+}
+
+.spot-details-info {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.spot-details-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.spot-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.spot-location i {
+    color: var(--primary-gold);
+}
+
+.spot-quick-stats {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.quick-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+}
+
+.quick-stat i {
+    color: var(--primary-gold);
+    font-size: 1.1rem;
+}
+
+.quick-stat span {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.spot-full-description h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-green);
+}
+
+.spot-full-description p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.spot-features h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-green);
+}
+
+.spot-features ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.spot-features ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+}
+
+.spot-features ul li i {
+    color: var(--primary-gold);
+}
+
+.spot-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.spot-actions .btn {
+    padding: 0.8rem 2rem;
+}
+
+/* Reviews Section */
+.reviews-section {
+    padding: 4rem 0;
+    background: white;
+}
+
+.reviews-summary {
+    margin-bottom: 3rem;
+}
+
+.summary-card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+}
+
+.summary-rating {
+    text-align: center;
+    padding: 1rem;
+}
+
+.big-rating {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary-gold);
+    line-height: 1;
+}
+
+.rating-stars {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.rating-count {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.rating-distribution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.distribution-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 40px;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.distribution-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.distribution-bar {
+    height: 8px;
+    background: #e8e8e8;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.distribution-fill {
+    height: 100%;
+    background: var(--primary-gold);
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.distribution-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+/* Reviews List */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.review-card {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.review-card:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reviewer-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--primary-gold);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.reviewer-info h4 {
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.review-rating {
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.review-content p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.review-footer {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-like, .btn-report {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    padding: 0;
+}
+
+.btn-like:hover {
+    color: var(--primary-gold);
+}
+
+.btn-report:hover {
+    color: #e74c3c;
+}
+
+.btn-like i {
+    margin-right: 0.3rem;
+}
+
+/* No Reviews */
+.no-reviews {
+    text-align: center;
+    padding: 3rem;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+}
+
+.no-reviews i {
+    font-size: 3rem;
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+}
+
+.no-reviews h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.no-reviews p {
+    color: var(--text-muted);
+}
+
+/* Add Review Form */
+.add-review-section {
+    margin-top: 2rem;
+}
+
+.review-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-light);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e8e8e8;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 3px rgba(199, 162, 59, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.star-rating-input {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.star-rating-input i {
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: #ddd;
+}
+
+.star-rating-input i:hover {
+    transform: scale(1.2);
+}
+
+.star-rating-input i.active {
+    color: var(--primary-gold);
+}
+
+#ratingDisplay {
+    font-size: 0.95rem;
+}
+
+/* Nearby Spots */
+.nearby-spots-section {
+    padding: 4rem 0;
+    background: var(--bg-light);
+}
+
+.nearby-spots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.nearby-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.nearby-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.nearby-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.nearby-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nearby-rating {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+.nearby-rating i {
+    color: var(--primary-gold);
+    margin-right: 0.2rem;
+}
+
+.nearby-info {
+    padding: 1.2rem;
+}
+
+.nearby-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.nearby-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.nearby-info .btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .spot-details-header {
+        grid-template-columns: 1fr;
+    }
+    
+    .spot-details-image {
+        min-height: 350px;
+    }
+    
+    .spot-details-image img {
+        position: relative;
+        height: 350px;
+    }
+    
+    .spot-details-info {
+        padding: 2rem;
+    }
+    
+    .summary-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .nearby-spots-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .back-button {
+        padding-top: 80px;
+    }
+    
+    .spot-details-image {
+        min-height: 250px;
+    }
+    
+    .spot-details-image img {
+        height: 250px;
+    }
+    
+    .spot-details-info h1 {
+        font-size: 2rem;
+    }
+    
+    .spot-quick-stats {
+        gap: 1rem;
+        flex-direction: column;
+    }
+    
+    .spot-features ul {
+        grid-template-columns: 1fr;
+    }
+    
+    .spot-actions {
+        flex-direction: column;
+    }
+    
+    .spot-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .review-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .review-form-container {
+        padding: 1.5rem;
+    }
+    
+    .star-rating-input i {
+        font-size: 1.5rem;
+    }
+    
+    .nearby-spots-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .spot-details-info {
+        padding: 1.5rem;
+    }
+    
+    .spot-details-info h1 {
+        font-size: 1.6rem;
+    }
+    
+    .big-rating {
+        font-size: 3rem;
+    }
+    
+    .summary-card {
+        padding: 1.5rem;
+    }
+    
+    .distribution-row {
+        grid-template-columns: 40px 1fr 30px;
+        gap: 0.5rem;
+    }
+    
+    .review-card {
+        padding: 1rem;
+    }
+    
+    .reviewer-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spot-details-content {
+    animation: slideUp 0.5s ease-out;
+}
+
+.review-card {
+    animation: slideUp 0.3s ease-out;
+}
+
+.review-card:nth-child(1) { animation-delay: 0.05s; }
+.review-card:nth-child(2) { animation-delay: 0.1s; }
+.review-card:nth-child(3) { animation-delay: 0.15s; }
+.review-card:nth-child(4) { animation-delay: 0.2s; }
+.review-card:nth-child(5) { animation-delay: 0.25s; }
+
+/* Success Message Animation */
+@keyframes successPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-message {
+    animation: successPop 0.5s ease-out;
+}
