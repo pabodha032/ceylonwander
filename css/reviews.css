@@ -1,8 +1,3 @@
-/* ========================================
-   REVIEWS PAGE SPECIFIC STYLES
-   ======================================== */
-
-/* Page Header */
 .page-header {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-green) 100%);
     padding: 120px 0 60px;

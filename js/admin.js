@@ -1,11 +1,4 @@
-// js/admin.js
-// ========================================
-// CEYLONWANDER - ADMIN PANEL (AZURE API)
-// ========================================
 
-/**
- * Initialize admin dashboard
- */
 function initAdminDashboard() {
     updateAdminStats();
     loadAdminSpots();
@@ -14,9 +7,6 @@ function initAdminDashboard() {
     setupAdminEventListeners();
 }
 
-/**
- * Update admin statistics from Azure
- */
 async function updateAdminStats() {
     try {
         const spots = await getSpots(true);
@@ -37,9 +27,7 @@ async function updateAdminStats() {
     }
 }
 
-/**
- * Load admin spots from Azure
- */
+
 async function loadAdminSpots() {
     try {
         const spots = await getSpots(true);
@@ -135,9 +123,7 @@ async function loadAdminReviews() {
     }
 }
 
-/**
- * Load admin users
- */
+
 function loadAdminUsers() {
     const users = getAdminUsers();
     const tbody = document.getElementById('usersTableBody');
@@ -166,9 +152,7 @@ function loadAdminUsers() {
     `).join('');
 }
 
-/**
- * Get admin users (derived from review authors)
- */
+
 function getAdminUsers() {
     const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
     const userMap = {};
@@ -190,9 +174,7 @@ function getAdminUsers() {
     return Object.values(userMap);
 }
 
-/**
- * View spot details in modal
- */
+
 function viewSpot(id) {
     const spot = getSpotById(id);
     if (!spot) {
@@ -223,9 +205,7 @@ function viewSpot(id) {
     });
 }
 
-/**
- * Edit spot - load data into form
- */
+
 async function editSpot(id) {
     const spot = await getSpotById(id);
     if (!spot) {
@@ -260,9 +240,7 @@ async function editSpot(id) {
     showNotification('Edit mode activated. Update the spot details and save.', 'info');
 }
 
-/**
- * Save spot (add or update)
- */
+
 async function saveSpot(event) {
     event.preventDefault();
 
@@ -301,9 +279,7 @@ async function saveSpot(event) {
     }
 }
 
-/**
- * Delete spot handler
- */
+
 async function deleteSpotHandler(id) {
     const spot = await getSpotById(id);
     if (!spot) {
@@ -326,9 +302,7 @@ async function deleteSpotHandler(id) {
     }
 }
 
-/**
- * View review in modal
- */
+
 function viewReview(id) {
     const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
     const review = reviews.find(r => r.id === id);
@@ -357,13 +331,7 @@ function viewReview(id) {
     });
 }
 
-/**
- * Delete review handler
- * FIX: this now correctly calls the (previously missing) deleteReview()
- * function from reviews.js and awaits it, matching the pattern used by
- * deleteSpotHandler. Before this fix, clicking "delete" on a review threw
- * "deleteReview is not defined" and the review was never removed.
- */
+
 async function deleteReviewHandler(id) {
     if (!confirm('Are you sure you want to delete this review?')) return;
 
@@ -378,9 +346,7 @@ async function deleteReviewHandler(id) {
     }
 }
 
-/**
- * Reset admin form
- */
+
 function resetAdminForm() {
     const form = document.getElementById('addSpotForm');
     if (form) form.reset();
@@ -414,9 +380,7 @@ function resetAdminForm() {
     window.editingSpotId = null;
 }
 
-/**
- * Update image preview
- */
+
 function updateImagePreview(url) {
     const preview = document.getElementById('imagePreview');
     if (!preview) return;
@@ -433,9 +397,7 @@ function updateImagePreview(url) {
     }
 }
 
-/**
- * Setup admin event listeners
- */
+
 function setupAdminEventListeners() {
     const form = document.getElementById('addSpotForm');
     if (form) {
@@ -455,9 +417,7 @@ function setupAdminEventListeners() {
     }
 }
 
-/**
- * Handle local file upload
- */
+
 function handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -497,9 +457,7 @@ function handleFileUpload(event) {
     reader.readAsDataURL(file);
 }
 
-/**
- * Switch tabs
- */
+
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
@@ -518,9 +476,7 @@ function switchTab(tabId) {
     });
 }
 
-/**
- * Filter admin spots
- */
+
 function filterAdminSpots() {
     const search = document.getElementById('adminSpotSearch')?.value.toLowerCase() || '';
     const rows = document.querySelectorAll('#spotsTableBody tr');
@@ -530,9 +486,7 @@ function filterAdminSpots() {
     });
 }
 
-/**
- * Filter admin reviews
- */
+
 function filterAdminReviews() {
     const search = document.getElementById('adminReviewSearch')?.value.toLowerCase() || '';
     const status = document.getElementById('reviewStatusFilter')?.value || 'all';
@@ -547,17 +501,7 @@ function filterAdminReviews() {
     });
 }
 
-// ========================================
-// DATA MANAGEMENT (Settings tab)
-// FIX: these 5 functions did not exist anywhere in the codebase.
-// The Settings tab buttons (Export Data, Import Data, Backup,
-// Reset All Data, Save Settings) called them via onclick="" but
-// clicking any of them threw "function is not defined".
-// ========================================
 
-/**
- * Export all spots + reviews as a downloadable JSON file
- */
 function exportData() {
     const spots = getFromStorage('spots', []);
     const reviews = getFromStorage('reviews', []);
@@ -581,9 +525,7 @@ function exportData() {
     showNotification('Data exported successfully!', 'success');
 }
 
-/**
- * Import spots + reviews from a JSON file the admin selects
- */
+
 function importData() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -627,10 +569,6 @@ function importData() {
     input.click();
 }
 
-/**
- * Create a timestamped local backup, and also trigger a download
- * (same output as Export, but also kept in localStorage as a safety copy)
- */
 function backupData() {
     const spots = getFromStorage('spots', []);
     const reviews = getFromStorage('reviews', []);
@@ -646,11 +584,7 @@ function backupData() {
     showNotification('Backup created and downloaded!', 'success');
 }
 
-/**
- * Reset all locally cached data (spots + reviews).
- * Note: this clears the browser's local cache/offline copy only.
- * It does NOT delete anything from the Azure SQL database.
- */
+
 function resetData() {
     if (!confirm('This will clear all locally cached spots and reviews from this browser. This cannot be undone. Continue?')) {
         return;
@@ -671,12 +605,7 @@ function resetData() {
     updateAdminStats();
 }
 
-/**
- * Save review-moderation settings to localStorage
- * NOTE: the "Max Reviews per User" input in admin.html currently has no id,
- * so it can't be reliably read here yet. Add id="maxReviewsPerUser" to that
- * <input> in admin.html (see notes) for this field to save correctly.
- */
+
 function saveSettings() {
     const maxReviewsInput = document.getElementById('maxReviewsPerUser');
 
@@ -690,9 +619,7 @@ function saveSettings() {
     showNotification('Settings saved successfully!', 'success');
 }
 
-// ========================================
-// EXPORT FUNCTIONS FOR GLOBAL USE
-// ========================================
+
 window.initAdminDashboard = initAdminDashboard;
 window.updateAdminStats = updateAdminStats;
 window.loadAdminSpots = loadAdminSpots;
@@ -717,7 +644,3 @@ window.saveSettings = saveSettings;
 window.editingSpotId = null;
 
 console.log('admin.js loaded successfully!');
-
-// Note: initAdminDashboard() is called from admin.html's own
-// DOMContentLoaded listener, not from here — keeping it in one
-// place avoids double-initializing the dashboard.

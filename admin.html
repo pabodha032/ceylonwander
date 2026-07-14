@@ -409,31 +409,26 @@
         </div>
     </footer>
 
-    <!-- ======================================== -->
-    <!-- SCRIPTS - Load in CORRECT ORDER          -->
-    <!-- ======================================== -->
-    <!-- 1. API Configuration FIRST -->
+    
     <script src="js/api-config.js"></script>
-    <!-- 2. Core Utilities -->
+    
     <script src="js/app.js"></script>
-    <!-- 3. Data Handling -->
+   
     <script src="js/spots.js"></script>
     <script src="js/reviews.js"></script>
-    <!-- 4. Admin Panel -->
+    
     <script src="js/admin.js"></script>
 
-    <!-- ======================================== -->
-    <!-- ADMIN PAGE INITIALIZATION                -->
-    <!-- ======================================== -->
+    
     <script>
-        // Initialize admin dashboard
+        
         document.addEventListener('DOMContentLoaded', function() {
             if (document.querySelector('.admin-dashboard')) {
                 initAdminDashboard();
             }
         });
 
-        // Clear file upload function (used in HTML)
+        
         function clearFileUpload() {
             const fileInput = document.getElementById('spotImageFile');
             if (fileInput) fileInput.value = '';
@@ -456,7 +451,7 @@
             }
         }
 
-        // Export functions needed by HTML
+        
         window.clearFileUpload = clearFileUpload;
     </script>
 </body>

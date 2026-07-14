@@ -1,8 +1,3 @@
-/* ========================================
-   SPOTS PAGE SPECIFIC STYLES
-   ======================================== */
-
-/* Page Header */
 .page-header {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-green) 100%);
     padding: 120px 0 60px;
@@ -72,7 +67,7 @@
     font-size: 0.7rem;
 }
 
-/* Spots Section */
+
 .spots-section {
     padding: 4rem 0;
     background: var(--bg-light);
@@ -171,14 +166,14 @@
     color: var(--text-dark);
 }
 
-/* Spots Grid */
+
 .spots-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
 }
 
-/* List View */
+
 .spots-grid.list-view {
     grid-template-columns: 1fr;
 }
@@ -201,7 +196,6 @@
     justify-content: center;
 }
 
-/* Spot Card Enhancements */
 .spot-card {
     background: white;
     border-radius: var(--border-radius);
@@ -283,7 +277,7 @@
     font-size: 0.95rem;
     margin-bottom: 1rem;
     display: -webkit-box;
-    /* -webkit-line-clamp: 2; */
+    
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.5;
@@ -307,7 +301,7 @@
     justify-content: center;
 }
 
-/* Load More */
+
 .load-more-container {
     text-align: center;
     margin-top: 3rem;
@@ -497,7 +491,7 @@
     }
 }
 
-/* Animation for spots loading */
+
 @keyframes fadeInSpot {
     from {
         opacity: 0;

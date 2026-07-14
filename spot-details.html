@@ -41,9 +41,7 @@
                 </a>
             </div>
 
-            <!-- Spot Details Content -->
             <div class="spot-details-content" id="spotDetails">
-                <!-- Dynamically loaded -->
             </div>
         </div>
     </section>
@@ -57,14 +55,10 @@
                 <p>What travelers are saying about this destination</p>
             </div>
 
-            <!-- Reviews Summary -->
             <div class="reviews-summary" id="reviewsSummary">
-                <!-- Dynamically loaded -->
             </div>
 
-            <!-- Reviews List -->
             <div class="reviews-list" id="reviewsList">
-                <!-- Dynamically loaded -->
             </div>
 
             <!-- Add Review Form -->
@@ -117,7 +111,6 @@
                 <h2>Nearby <span style="color: var(--primary-gold);">Attractions</span></h2>
             </div>
             <div class="nearby-spots-grid" id="nearbySpots">
-                <!-- Dynamically loaded -->
             </div>
         </div>
     </section>
@@ -185,27 +178,18 @@
         </div>
     </footer>
 
-    <!-- ======================================== -->
-    <!-- SCRIPTS - Load in CORRECT ORDER          -->
-    <!-- ======================================== -->
-    <!-- 1. API Configuration FIRST -->
+  
     <script src="js/api-config.js"></script>
-    <!-- 2. Core Utilities -->
     <script src="js/app.js"></script>
-    <!-- 3. Data Handling -->
     <script src="js/spots.js"></script>
     <script src="js/reviews.js"></script>
 
-    <!-- ======================================== -->
-    <!-- SPOT DETAILS PAGE INITIALIZATION         -->
-    <!-- ======================================== -->
+   
     <script>
         let currentSpotId = null;
         let selectedRating = 0;
 
-        /**
-         * Initialize page on load
-         */
+        
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const spotId = urlParams.get('id');
@@ -220,9 +204,7 @@
             }
         });
 
-        /**
-         * Load spot details from Azure API
-         */
+        
         async function loadSpotDetails(spotId) {
             try {
                 const spot = await getSpotById(spotId);
@@ -238,7 +220,7 @@
                     return;
                 }
 
-                // Update page title
+                
                 document.title = `${spot.name} - CeylonWander`;
 
                 const detailsHTML = `
@@ -315,16 +297,13 @@
             }
         }
 
-        /**
-         * Load reviews for a spot from Azure API
-         */
         async function loadReviews(spotId) {
             try {
                 const reviews = await getReviewsBySpotId(spotId);
                 const spot = await getSpotById(spotId);
                 if (!spot) return;
 
-                // Reviews Summary
+                
                 const summaryHTML = `
                     <div class="summary-card">
                         <div class="summary-rating">
@@ -341,7 +320,7 @@
                 `;
                 document.getElementById('reviewsSummary').innerHTML = summaryHTML;
 
-                // Reviews List
+                
                 if (reviews.length === 0) {
                     document.getElementById('reviewsList').innerHTML = `
                         <div class="no-reviews">
@@ -391,9 +370,7 @@
             }
         }
 
-        /**
-         * Load nearby spots
-         */
+        
         async function loadNearbySpots(spotId) {
             try {
                 const currentSpot = await getSpotById(spotId);
@@ -438,9 +415,7 @@
             }
         }
 
-        /**
-         * Generate star rating HTML
-         */
+       
         function generateStarRating(rating) {
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
@@ -457,9 +432,6 @@
             return stars;
         }
 
-        /**
-         * Generate rating distribution
-         */
         function generateRatingDistribution(reviews) {
             const distribution = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
             reviews.forEach(review => {
@@ -480,9 +452,7 @@
             `).join('');
         }
 
-        /**
-         * Set rating for review form
-         */
+       
         function setRating(rating) {
             selectedRating = rating;
             document.getElementById('reviewRating').value = rating;
@@ -499,22 +469,6 @@
             document.getElementById('ratingDisplay').textContent = `${rating} / 5`;
         }
 
-        /**
-         * Handle the review form submission.
-         *
-         * FIX: this used to be a second, local `submitReview(event)` function that
-         * silently overrode the correct `submitReview()` from reviews.js (via
-         * `window.submitReview = submitReview` at the bottom of this file). That
-         * local version called a different, incompatible API path
-         * (`${apiUrl}/reviews` instead of `?endpoint=reviews`), and skipped the
-         * rating-recalculation and offline-fallback logic reviews.js already
-         * handles.
-         *
-         * Now this function only gathers the form data and hands it to the
-         * shared `submitReview(reviewData)` from reviews.js — it no longer
-         * defines its own competing version, and nothing overwrites
-         * `window.submitReview` anymore.
-         */
         async function handleReviewFormSubmit(event) {
             event.preventDefault();
 
@@ -539,7 +493,6 @@
                     comment: comment
                 };
 
-                // Delegate to the shared submitReview() in reviews.js
                 await submitReview(reviewData);
 
                 alert('Thank you for your review!');
@@ -592,7 +545,6 @@
             });
         }
 
-        // Make functions globally available
         window.setRating = setRating;
         window.handleReviewFormSubmit = handleReviewFormSubmit;
         window.likeReview = likeReview;

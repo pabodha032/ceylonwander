@@ -118,7 +118,7 @@
                 <p>Explore the most visited and highly rated attractions in Sri Lanka</p>
             </div>
             <div class="spots-grid" id="spotsGrid">
-                <!-- Spots will be loaded dynamically via JavaScript -->
+                
             </div>
         </div>
     </section>
@@ -288,24 +288,17 @@
         </div>
     </footer>
 
-    <!-- ======================================== -->
-    <!-- SCRIPTS - Load in CORRECT ORDER          -->
-    <!-- ======================================== -->
-    <!-- 1. API Configuration FIRST -->
+   
     <script src="js/api-config.js"></script>
-    <!-- 2. Core Utilities -->
+    
     <script src="js/app.js"></script>
-    <!-- 3. Data Handling -->
+    
     <script src="js/spots.js"></script>
     <script src="js/reviews.js"></script>
 
-    <!-- ======================================== -->
-    <!-- HOME PAGE INITIALIZATION                 -->
-    <!-- ======================================== -->
+    
     <script>
-        /**
-         * Load featured spots from Azure API
-         */
+        
         async function loadFeaturedSpots() {
             try {
                 const spots = await getSpots();
@@ -356,9 +349,7 @@
             }
         }
 
-        /**
-         * Setup data change listener to refresh spots when admin makes changes
-         */
+        
         function setupDataChangeListener() {
             try {
                 const channel = new BroadcastChannel('sl_tourist_data');
@@ -382,9 +373,7 @@
             }
         }
 
-        /**
-         * Initialize hero animations (stats counter)
-         */
+       
         function initHeroAnimations() {
             const stats = document.querySelectorAll('.stat-number');
             stats.forEach(stat => {
@@ -403,9 +392,7 @@
             });
         }
 
-        /**
-         * Initialize search functionality
-         */
+        
         function initSearch() {
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
@@ -417,9 +404,7 @@
             }
         }
 
-        /**
-         * Search spots function
-         */
+        
         function searchSpots() {
             const query = document.getElementById('searchInput').value;
             if (query.trim()) {
@@ -427,9 +412,7 @@
             }
         }
 
-        /**
-         * Initialize category filters
-         */
+        
         function initCategoryFilters() {
             const filterBtns = document.querySelectorAll('.filter-btn');
             const categoryCards = document.querySelectorAll('.category-card');
@@ -455,9 +438,7 @@
             });
         }
 
-        // ========================================
-        // INITIALIZE ON PAGE LOAD
-        // ========================================
+       
         document.addEventListener('DOMContentLoaded', function() {
             loadFeaturedSpots();
             initHeroAnimations();
@@ -466,7 +447,7 @@
             setupDataChangeListener();
         });
 
-        // Make functions globally available
+        
         window.loadFeaturedSpots = loadFeaturedSpots;
         window.initHeroAnimations = initHeroAnimations;
         window.initSearch = initSearch;

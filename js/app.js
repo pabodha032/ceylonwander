@@ -1,21 +1,5 @@
-/**
- * ========================================
- * CEYLONWANDER APP
- * Main JavaScript File
- * ========================================
- */
-
-// ========================================
-// NAVIGATION
-// ========================================
-
-/**
- * Initialize navigation functionality
- * - Hamburger menu toggle for mobile
- * - Scroll effect for navbar
- */
 document.addEventListener('DOMContentLoaded', function() {
-    // Navbar toggle
+    
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
@@ -27,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Navbar scroll effect
+    
     const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
 
@@ -41,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScroll = currentScroll;
     });
 
-    // Close mobile menu on link click
+   
     const navLinks = document.querySelectorAll('.nav-menu a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -54,14 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========================================
-// SCROLL ANIMATIONS
-// ========================================
 
-/**
- * Initialize scroll animations
- * - Fade in elements when they come into view
- */
 document.addEventListener('DOMContentLoaded', function() {
     const fadeElements = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver((entries) => {
@@ -80,15 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ========================================
-// UTILITY FUNCTIONS
-// ========================================
 
-/**
- * Format a date string to readable format
- * @param {string} dateString - ISO date string
- * @returns {string} Formatted date
- */
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -98,12 +67,6 @@ function formatDate(dateString) {
     });
 }
 
-/**
- * Generate star rating HTML
- * @param {number} rating - Rating value (0-5)
- * @param {string} size - Size class (optional)
- * @returns {string} HTML string of stars
- */
 function generateStarRating(rating, size = '') {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
@@ -123,31 +86,18 @@ function generateStarRating(rating, size = '') {
     return stars;
 }
 
-/**
- * Truncate text to specified length
- * @param {string} text - Text to truncate
- * @param {number} length - Maximum length
- * @returns {string} Truncated text
- */
+
 function truncateText(text, length = 100) {
     if (text.length <= length) return text;
     return text.substring(0, length) + '...';
 }
 
-/**
- * Generate random ID
- * @returns {number} Random ID
- */
+
 function generateId() {
     return Date.now() + Math.floor(Math.random() * 1000);
 }
 
-/**
- * Debounce function for performance
- * @param {Function} func - Function to debounce
- * @param {number} wait - Wait time in milliseconds
- * @returns {Function} Debounced function
- */
+
 function debounce(func, wait = 300) {
     let timeout;
     return function executedFunction(...args) {
@@ -160,25 +110,13 @@ function debounce(func, wait = 300) {
     };
 }
 
-/**
- * Get query parameter from URL
- * @param {string} param - Parameter name
- * @returns {string|null} Parameter value
- */
+
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
 
-// ========================================
-// LOCAL STORAGE HELPERS
-// ========================================
 
-/**
- * Save data to local storage
- * @param {string} key - Storage key
- * @param {*} data - Data to store
- */
 function saveToStorage(key, data) {
     try {
         localStorage.setItem(key, JSON.stringify(data));
@@ -187,12 +125,7 @@ function saveToStorage(key, data) {
     }
 }
 
-/**
- * Get data from local storage
- * @param {string} key - Storage key
- * @param {*} defaultValue - Default value if key doesn't exist
- * @returns {*} Stored data
- */
+
 function getFromStorage(key, defaultValue = null) {
     try {
         const data = localStorage.getItem(key);
@@ -203,10 +136,7 @@ function getFromStorage(key, defaultValue = null) {
     }
 }
 
-/**
- * Remove data from local storage
- * @param {string} key - Storage key
- */
+
 function removeFromStorage(key) {
     try {
         localStorage.removeItem(key);
@@ -215,18 +145,9 @@ function removeFromStorage(key) {
     }
 }
 
-// ========================================
-// NOTIFICATION SYSTEM
-// ========================================
 
-/**
- * Show a toast notification
- * @param {string} message - Notification message
- * @param {string} type - Notification type (success, error, warning, info)
- * @param {number} duration - Duration in milliseconds
- */
 function showNotification(message, type = 'info', duration = 3000) {
-    // Check if notification container exists
+  
     let container = document.querySelector('.notification-container');
     if (!container) {
         container = document.createElement('div');
@@ -284,7 +205,7 @@ function showNotification(message, type = 'info', duration = 3000) {
 
     container.appendChild(notification);
 
-    // Auto-remove after duration
+   
     setTimeout(() => {
         if (notification.parentElement) {
             notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
@@ -295,7 +216,7 @@ function showNotification(message, type = 'info', duration = 3000) {
     }, duration);
 }
 
-// Add notification animations
+
 const notificationStyles = document.createElement('style');
 notificationStyles.textContent = `
     @keyframes slideInRight {
@@ -321,17 +242,6 @@ notificationStyles.textContent = `
 `;
 document.head.appendChild(notificationStyles);
 
-// ========================================
-// MODAL SYSTEM
-// ========================================
-
-/**
- * Show a modal dialog
- * @param {string} title - Modal title
- * @param {string} content - Modal content HTML
- * @param {Object} options - Modal options
- * @returns {HTMLElement} Modal element
- */
 function showModal(title, content, options = {}) {
     const {
         confirmText = 'Confirm',
@@ -342,7 +252,7 @@ function showModal(title, content, options = {}) {
         onCancel = null
     } = options;
 
-    // Remove existing modal
+    
     const existingModal = document.querySelector('.modal-overlay');
     if (existingModal) {
         existingModal.remove();
@@ -397,7 +307,7 @@ function showModal(title, content, options = {}) {
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
 
-    // Close on overlay click
+    
     overlay.addEventListener('click', function(e) {
         if (e.target === this) {
             this.remove();
@@ -408,15 +318,7 @@ function showModal(title, content, options = {}) {
     return overlay;
 }
 
-// ========================================
-// LOADING SPINNER
-// ========================================
 
-/**
- * Show a loading spinner
- * @param {string} message - Loading message
- * @returns {HTMLElement} Spinner element
- */
 function showLoading(message = 'Loading...') {
     const overlay = document.createElement('div');
     overlay.className = 'loading-overlay';
@@ -450,10 +352,7 @@ function showLoading(message = 'Loading...') {
     return overlay;
 }
 
-/**
- * Hide loading spinner
- * @param {HTMLElement} spinner - Spinner element to remove
- */
+
 function hideLoading(spinner) {
     if (spinner) {
         spinner.remove();
@@ -465,7 +364,7 @@ function hideLoading(spinner) {
     }
 }
 
-// Add spin animation
+
 const spinStyles = document.createElement('style');
 spinStyles.textContent = `
     @keyframes spin {
@@ -488,25 +387,13 @@ spinStyles.textContent = `
 `;
 document.head.appendChild(spinStyles);
 
-// ========================================
-// FORM VALIDATION HELPERS
-// ========================================
 
-/**
- * Validate email format
- * @param {string} email - Email to validate
- * @returns {boolean} Is valid email
- */
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-/**
- * Validate URL format
- * @param {string} url - URL to validate
- * @returns {boolean} Is valid URL
- */
+
 function isValidUrl(url) {
     try {
         new URL(url);
@@ -516,40 +403,26 @@ function isValidUrl(url) {
     }
 }
 
-/**
- * Validate phone number
- * @param {string} phone - Phone number to validate
- * @returns {boolean} Is valid phone number
- */
+
 function isValidPhone(phone) {
     const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     return re.test(phone);
 }
 
-// ========================================
-// THEME TOGGLE (Dark Mode - Optional)
-// ========================================
 
-/**
- * Toggle dark mode
- */
 function toggleTheme() {
     const body = document.body;
     const isDark = body.classList.toggle('dark-mode');
 
-    // Save preference
+    
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
-    // Update icon
     const themeIcon = document.querySelector('.theme-toggle i');
     if (themeIcon) {
         themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     }
 }
 
-/**
- * Load theme preference
- */
 function loadTheme() {
     const theme = localStorage.getItem('theme');
     if (theme === 'dark') {
@@ -557,11 +430,6 @@ function loadTheme() {
     }
 }
 
-// ========================================
-// EXPORT FUNCTIONS FOR GLOBAL USE
-// ========================================
-
-// Make functions globally available
 window.formatDate = formatDate;
 window.generateStarRating = generateStarRating;
 window.truncateText = truncateText;
@@ -581,11 +449,7 @@ window.isValidPhone = isValidPhone;
 window.toggleTheme = toggleTheme;
 window.loadTheme = loadTheme;
 
-// ========================================
-// INITIALIZATION
-// ========================================
 
-// Load theme on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadTheme();
     console.log('CeylonWander App initialized!');

@@ -1,6 +1,3 @@
-/* ========================================
-   CSS VARIABLES & RESET
-   ======================================== */
 :root {
     --primary-green: #1A5C2E;
     --primary-gold: #C7A23B;
@@ -101,9 +98,8 @@ img {
     margin: 0 auto;
 }
 
-/* ========================================
-   NAVBAR
-   ======================================== */
+
+  
 .navbar {
     position: fixed;
     top: 0;
@@ -177,9 +173,6 @@ img {
     color: var(--text-dark);
 }
 
-/* ========================================
-   HERO SECTION
-   ======================================== */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -306,9 +299,7 @@ img {
     margin-right: auto;
 }
 
-/* ========================================
-   BUTTONS
-   ======================================== */
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -404,9 +395,7 @@ img {
     margin-top: 0.2rem;
 }
 
-/* ========================================
-   SEARCH SECTION
-   ======================================== */
+
 .search-section {
     padding: 3rem 0;
     background: white;
@@ -486,9 +475,7 @@ img {
     border-color: var(--primary-green);
 }
 
-/* ========================================
-   FEATURED SPOTS
-   ======================================== */
+
 .featured-spots {
     padding: 4rem 0;
 }
@@ -572,7 +559,7 @@ img {
     font-size: 0.95rem;
     margin-bottom: 1rem;
     display: -webkit-box;
-    /* -webkit-line-clamp: 2; */
+    
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -589,9 +576,6 @@ img {
     margin-right: 0.3rem;
 }
 
-/* ========================================
-   ABOUT SECTION
-   ======================================== */
 .about-section {
     padding: 5rem 0;
     background: white;
@@ -673,9 +657,7 @@ img {
     color: var(--text-muted);
 }
 
-/* ========================================
-   CATEGORIES SECTION
-   ======================================== */
+
 .categories-section {
     padding: 4rem 0;
     background: var(--bg-light);
@@ -732,9 +714,7 @@ img {
     color: var(--text-muted);
 }
 
-/* ========================================
-   FOOTER
-   ======================================== */
+
 .footer {
     background: var(--primary-dark);
     color: rgba(255,255,255,0.8);
@@ -823,9 +803,7 @@ img {
     font-size: 0.9rem;
 }
 
-/* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
+
 @media (max-width: 1024px) {
     .hero-title {
         font-size: 3.5rem;
@@ -966,9 +944,7 @@ img {
     }
 }
 
-/* ========================================
-   SCROLL ANIMATION UTILITY
-   ======================================== */
+
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -980,9 +956,8 @@ img {
     transform: translateY(0);
 }
 
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
+
+  
 .text-center { text-align: center; }
 .text-gold { color: var(--primary-gold); }
 .text-green { color: var(--primary-green); }
@@ -995,9 +970,7 @@ img {
 .mt-3 { margin-top: 2rem; }
 .mt-4 { margin-top: 3rem; }
 
-/* ========================================
-   ADDITIONAL HERO ANIMATIONS
-   ======================================== */
+
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -1008,9 +981,7 @@ img {
     display: inline-block;
 }
 
-/* ========================================
-   CLOUD ANIMATION FIXES
-   ======================================== */
+
 @media (max-width: 768px) {
     .cloud-moving img {
         transform: scale(0.05);

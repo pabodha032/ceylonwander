@@ -1,8 +1,3 @@
-/* ========================================
-   SPOT DETAILS PAGE SPECIFIC STYLES
-   ======================================== */
-
-/* Back Button */
 .back-button {
     padding-top: 100px;
     margin-bottom: 2rem;
@@ -678,7 +673,7 @@
 .review-card:nth-child(4) { animation-delay: 0.2s; }
 .review-card:nth-child(5) { animation-delay: 0.25s; }
 
-/* Success Message Animation */
+
 @keyframes successPop {
     0% {
         transform: scale(0.5);
